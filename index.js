@@ -2,12 +2,10 @@
 module.exports = Auth;
 
 const password = require('./lib/password');
-const Token = require('./lib/token');
+const token = require('./lib/token');
 
 
-function Auth(secret) {
-  return {
-    password: password,
-    token: Token(secret)
-  }
-}
+function Auth() {}
+
+Auth.password = password;
+Auth.token = token;
