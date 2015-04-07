@@ -39,8 +39,14 @@ describe('Password', function() {
     var check = password.check;
 
     it('should return null if missing arguments', function(done) {
-      check().then(function(val) {
-        expect(val).toBe(null);
+      Promise.all([
+        check(),
+        check('password')
+      ])
+      .then(function(values) {
+        values.forEach(function(val) {
+          expect(val).toBe(null);
+        });
         done()
       });
     });
