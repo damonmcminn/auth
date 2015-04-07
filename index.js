@@ -1,7 +1,9 @@
-const password = require('./lib/password');
-const token = require('./lib/token');
-
+'use strict';
 module.exports = Auth;
+
+const password = require('./lib/password');
+const Token = require('./lib/token');
+
 
 function Auth(secret) {
   return {
