@@ -27,6 +27,8 @@
     "jasmine": "^2.2.1"
   },
   "dependencies": {
+    "bcrypt": "^0.8.2",
+    "bluebird": "^2.9.24",
     "jwt-simple": "^0.2.0"
   }
 }
