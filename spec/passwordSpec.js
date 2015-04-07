@@ -37,6 +37,7 @@ describe('Password', function() {
 
   describe('#check', function() {
     var check = password.check;
+    var hashedPromise = password.hash('password')
 
     it('should return null if missing arguments', function(done) {
       Promise.all([
@@ -52,20 +53,28 @@ describe('Password', function() {
     });
 
     it('should return false if password doesn\'t match', function(done) {
-      password.hash('password')
-        .then(function(hashed) {
-          Promise.all([
-            check(hashed, hashed),
-            check('foo', hashed)
-          ])
-          .then(function(checked) {
-            checked.forEach(function(val) {
-              expect(val).toBe(false);
-            });
-            done();
+      hashedPromise.then(function(hashed) {
+        Promise.all([
+          check(hashed, hashed),
+          check('foo', hashed)
+        ])
+        .then(function(checked) {
+          checked.forEach(function(val) {
+            expect(val).toBe(false);
           });
+          done();
         });
+      });
+    });
+
+    it('should return true if password matches', function(done) {
+      hashedPromise.then(function(hash) {
+        check('password', hash)
+        .then(function(valid) {
+          expect(valid).toBe(true);
+          done();
+        });
+      });
     });
   });
-
 });
