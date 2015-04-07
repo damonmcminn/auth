@@ -45,6 +45,21 @@ describe('Password', function() {
       });
     });
 
+    it('should return false if password doesn\'t match', function(done) {
+      password.hash('password')
+        .then(function(hashed) {
+          Promise.all([
+            check(hashed, hashed),
+            check('foo', hashed)
+          ])
+          .then(function(checked) {
+            checked.forEach(function(val) {
+              expect(val).toBe(false);
+            });
+            done();
+          });
+        });
+    });
   });
 
 });
