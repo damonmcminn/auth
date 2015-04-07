@@ -1,2 +1,2 @@
 # auth
-API authentication utlities
+API authentication utilities
