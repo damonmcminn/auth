@@ -4,12 +4,13 @@ describe('Password', function() {
 
   describe('#hash', function() {
 
-    it('should return false if password undefined or !== string', function(done) {
+    it('should return false if password undefined, "" or !== string', function(done) {
       Promise.all([
         password.hash(),
         password.hash(1),
         password.hash({}),
-        password.hash([])
+        password.hash([]),
+        password.hash('')
       ])
       .then(function(values) {
         values.forEach(function(val) {
@@ -23,20 +24,23 @@ describe('Password', function() {
       Promise.all([
         password.hash('foo'),
         password.hash('bar'),
-        password.hash(''),
-        password.hash('a very very long password in a phrase'),
+        password.hash('this is a very long password')
       ])
       .then(function(values) {
         values.forEach(function(val) {
           expect(val.length).toBe(60);
-          done();
         });
+        done();
       });
     });
-
   });
 
-  describe('#authenticate', function() {
+  describe('#check', function() {
+    var check = password.check;
+
+    it('should return false if missing arguments', function() {
+    });
+
   });
 
 });
