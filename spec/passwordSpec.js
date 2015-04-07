@@ -4,7 +4,7 @@ describe('Password', function() {
 
   describe('#hash', function() {
 
-    it('should return false if password undefined, "" or !== string', function(done) {
+    it('should return null if password undefined, "" or !== string', function(done) {
       Promise.all([
         password.hash(),
         password.hash(1),
@@ -14,7 +14,7 @@ describe('Password', function() {
       ])
       .then(function(values) {
         values.forEach(function(val) {
-          expect(val).toBe(false);
+          expect(val).toBe(null);
         });
         done();
       });
@@ -38,7 +38,11 @@ describe('Password', function() {
   describe('#check', function() {
     var check = password.check;
 
-    it('should return false if missing arguments', function() {
+    it('should return null if missing arguments', function(done) {
+      check().then(function(val) {
+        expect(val).toBe(null);
+        done()
+      });
     });
 
   });
