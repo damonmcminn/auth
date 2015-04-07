@@ -1,0 +1,32 @@
+{
+  "name": "auth",
+  "version": "1.0.0",
+  "description": "API authentication utilities",
+  "main": "index.js",
+  "scripts": {
+    "test": "node_modules/jasmine/bin/jasmine.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/damonmcminn/auth.git"
+  },
+  "keywords": [
+    "API",
+    "authentication",
+    "password",
+    "jwt",
+    "token"
+  ],
+  "author": "Damon McMinn",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/damonmcminn/auth/issues"
+  },
+  "homepage": "https://github.com/damonmcminn/auth",
+  "devDependencies": {
+    "jasmine": "^2.2.1"
+  },
+  "dependencies": {
+    "jwt-simple": "^0.2.0"
+  }
+}
