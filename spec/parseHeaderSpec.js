@@ -16,26 +16,30 @@ describe('ParseHeader', function() {
 
   it('should return the {user,password} for "Basic {base64}"', function() {
     var parseBasic = parseHeader('basic');
-    var str = Buffer('user:password', 'utf8').toString('base64');
+    var str = (new Buffer('user:password', 'utf8')).toString('base64');
     var parsed = parseBasic(`Basic ${str}`);
     expect(parsed.user).toBe('user');
     expect(parsed.password).toBe('password');
   });
 
   it('should return false if header is doesn\'t match type"', function() {
-    var parseToken = parseHeader('basic');
-    expect(parseToken('Bearer foo.bar.token')).toBe(false);
+    var parseBasic = parseHeader('basic');
+    expect(parseBasic('Bearer foo.bar.token')).toBe(false);
   });
 
-  it('should return false if header is malformed"', function() {
+  it('should return false if header or "Basic {base64} is malformed', function() {
     var parseBasic = parseHeader('basic');
     var notBase64 = parseBasic('Basic foo');
     var noString = parseBasic('Basic ');
+    var noColon = (new Buffer('pass', 'utf8')).toString('base64');
+    var noDelimitingColon = parseBasic(`Basic ${noColon}`);
 
-    // var is64 = Buffer(str, 'base64')
-    // is64.isEncoding('base64') => true
+    var parseToken = parseHeader('token');
+    var noToken = parseToken('Bearer ');
 
-    expect(notBase64.user).toBe('user');
-    expect(noString.user).toBe('user');
+    expect(notBase64).toBe(false);
+    expect(noString).toBe(false);
+    expect(noToken).toBe(false);
+    expect(noDelimitingColon).toBe(false);
   });
 });
