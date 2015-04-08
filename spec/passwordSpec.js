@@ -1,4 +1,4 @@
-const password = require('../lib/password');
+const password = require('../lib/password')(1);
 
 describe('Password', function() {
 
