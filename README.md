@@ -7,13 +7,15 @@ API authentication utilities
 ## Usage
 ```javascript
 var auth = require('auth');
-// auth.password(ROUNDS)
-// ROUNDS - OPTIONAL number of bcrypt rounds
-// defaults to 10
 
+// auth.password(ROUNDS)
+// ROUNDS: (optional) number of bcrypt rounds, default 10
 var password = auth.password(10);
-var token = auth.token('secret'); // secret for signing JWT
+
+// auth.token(SECRET)
+// SECRET: string for signing JWT
 // auth.token() => ReferenceError: secret undefined
+var token = auth.token('secret');
 
 var hashedPassword;
 
