@@ -1,5 +1,5 @@
 {
-  "name": "auth",
+  "name": "auth-utilities",
   "version": "1.0.0",
   "description": "API authentication utilities",
   "main": "index.js",
