@@ -1,12 +1,12 @@
-# auth
+# auth-utilities
 API authentication utilities
 
 ## Installation
-`npm install --save auth`
+`npm install --save auth-utilities`
 
 ## Usage
 ```javascript
-var auth = require('auth');
+var auth = require('auth-utilities');
 
 // auth.password(ROUNDS)
 // ROUNDS: (optional) number of bcrypt rounds, default 10
