@@ -7,15 +7,13 @@ API authentication utilities
 ## Usage
 ```javascript
 var auth = require('auth-utilities');
+```
 
+### Auth#password
+```javascript
 // auth.password(ROUNDS)
 // ROUNDS: (optional) number of bcrypt rounds, default 10
 var password = auth.password(10);
-
-// auth.token(SECRET)
-// SECRET: string for signing JWT
-// auth.token() => ReferenceError: secret undefined
-var token = auth.token('secret');
 
 var hashedPassword;
 
@@ -31,7 +29,32 @@ password.check('password', hashedPassword)
     console.log(isValid);
   });
 // => true
+```
 
-token.authenticate(token.generate({foo: 'bar'}));
+### Auth#token
+```javascript
+// auth.token(SECRET)
+// SECRET: string for signing JWT
+// auth.token() => ReferenceError: secret undefined
+var token = auth.token('secret');
+var signedPayload = token.generate({foo: 'bar'});
+token.authenticate(signedPayload);
 // => {foo: 'bar'}
+```
+
+### Auth#parseHeader
+```javascript
+var parseBasic = auth.parseHeader('basic');
+
+// Base64("decoded:base64") === ZGVjb2RlZDpiYXNlNjQ=
+var header = 'Basic ZGVjb2RlZDpiYXNlNjQ=';
+
+// returns user & password or false if malformed
+parseBasic(header);
+// => { user: 'decoded', password: 'base64' }
+
+// returns token or false if malformed
+var parseToken = auth.parseHeader('token');
+parseToken('Bearer foo.bar.token');
+// => foo.bar.token
 ```
