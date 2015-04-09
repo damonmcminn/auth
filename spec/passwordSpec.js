@@ -39,16 +39,24 @@ describe('Password', function() {
     var check = password.check;
     var hashedPromise = password.hash('password')
 
-    it('should return null if missing arguments', function(done) {
-      Promise.all([
-        check(),
-        check('password')
-      ])
-      .then(function(values) {
-        values.forEach(function(val) {
-          expect(val).toBe(null);
+    it('should return null if !argument || arguments !== string', function(done) {
+
+      hashedPromise.then(function(hashed) {
+        Promise.all([
+          check(),
+          check('password'),
+          check(false, hashed),
+          check(null, hashed),
+          check({}, hashed),
+          check([], hashed),
+          check(1, hashed)
+        ])
+        .then(function(values) {
+          values.forEach(function(val) {
+            expect(val).toBe(null);
+          });
+          done()
         });
-        done()
       });
     });
 
