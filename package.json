@@ -30,5 +30,8 @@
     "bcrypt": "^0.8.2",
     "bluebird": "^2.9.24",
     "jwt-simple": "^0.2.0"
+  },
+  "engines": {
+    "node": ">=1.x || >=0.12.x"
   }
 }
